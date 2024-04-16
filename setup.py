@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-   name='Copift-CopiftLogger',
+   name='Copift-Logger',
    version='1.0',
    description='Copift logger',
    license='MIT',
