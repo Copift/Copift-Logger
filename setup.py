@@ -7,7 +7,7 @@ setup(
    license='MIT',
    author='Sergeev Daniil',
    author_email='danikin000@yandex.ru',
-   url='https://github.com/Copift/Copift-mtracker',
+   url='https://github.com/Copift/Copift-Logger',
    packages=['CopiftLogger'],
    install_requires=['sentry-sdk'], # it is empty since we use standard python library
    extras_require={
