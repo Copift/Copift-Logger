@@ -2,13 +2,30 @@ import tracemalloc
 import sys
 import logging
 import sentry_sdk
+
+
+class CustomFilter(logging.Filter):
+
+    COLOR = {
+        "DEBUG": "GREEN",
+        "INFO": "GREEN",
+        "WARNING": "YELLOW",
+        "ERROR": "RED",
+        "CRITICAL": "RED",
+    }
+
+    def filter(self, record):
+        record.color = CustomFilter.COLOR[record.levelname]
+        return True
+
 def createLogger():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
     handler2 = logging.FileHandler(f"project.log", mode='w')
-    formatter2 = logging.Formatter("%(name)s - %(levelname)s - %(asctime)s  : %(message)s",datefmt = '%Y-%m-%d %H:%M:%S')
+    formatter2 = logging.Formatter("%(name)s - %(levelname)s - %(asctime)s  : (%(filename)s).%(funcName)s(%(lineno)d) %(message)s",datefmt = '%Y-%m-%d %H:%M:%S')
     handler2.setFormatter(formatter2)
     logger.addHandler(handler2)
+    logger.addFilter(CustomFilter())
     return logger
 def createSentry(sentry_dsn: str):
     """
